@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Salon.Models;
@@ -17,7 +18,7 @@ namespace Salon.Controllers
 
     public ActionResult Index()
     {
-      List<Clients> model = _db.Clients.ToList();
+      List<Clients> model = _db.Clients.Include(clients => clients.Stylists).ToList();
       return View(model);
     }
 
