@@ -16,9 +16,9 @@ namespace Salon.Controllers
       _db = db;
     }
 
-    public ActionResult Index()
+     public ActionResult Index()
     {
-      List<Stylists> model = _db.Stylists.Include(stylists => stylists.Clients).ToList();
+      List<Stylists> model = _db.Stylists.ToList();
       return View(model);
     }
 
