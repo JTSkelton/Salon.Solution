@@ -82,7 +82,7 @@ namespace Salon.Controllers
     }
 
 [HttpPost]
-public ActionResult DeleteCategory(int joinId)
+public ActionResult DeleteStylist(int joinId)
 {
     var joinEntry = _db.StylistClients.FirstOrDefault(entry => entry.StylistClientId == joinId);
     _db.StylistClients.Remove(joinEntry);
@@ -90,7 +90,7 @@ public ActionResult DeleteCategory(int joinId)
     return RedirectToAction("Index");
 }
 
-    public ActionResult AddCategory(int id)
+    public ActionResult AddStylist(int id)
 {
     var thisClient = _db.Clients.FirstOrDefault(client => client.ClientId == id);
     ViewBag.StylistId = new SelectList(_db.Stylists, "StylistId", "StylistName");
@@ -98,7 +98,7 @@ public ActionResult DeleteCategory(int joinId)
 }
 
 [HttpPost]
-public ActionResult AddCategory(Client clients, int StylistId)
+public ActionResult AddStylist(Client clients, int StylistId)
 {
     if (StylistId != 0)
     {

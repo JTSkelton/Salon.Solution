@@ -11,10 +11,50 @@
   <h3>No Stylists have been added yet!</h3>
 } 
 
-@foreach (Stylist stylists in Model)
-{
-  <li>@Html.ActionLink($"{stylists.StylistName}", "Details", new { id = stylists.StylistId })</li>
-}
+<table class ="table table-borderd table-striped" style="width: 100%">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Stylist Name
+            </th>
+            <th>
+                Hair Styles
+            </th>
+            <th>
+                Age
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Stylist stylists in Model)
+        {
+            <tr class="table table-hover table-secondary">
+                <td width 10%>
+                    @stylists.StylistId
+                </td>
+                <td width 50%>
+                    @stylists.StylistName
+                </td>
+                <td width 30%>
+                    @stylists.HairStyles
+                </td>
+                <td width 30%>
+                    @stylists.Age
+                </td>
+                <td>
+                @Html.ActionLink("Details", "Details", new { id = @stylists.StylistId}, new { @class = "btn btn-outline-warning" })
+                </td>
+                <td>
+                  @Html.ActionLink("Edit", "Edit", new { id = @stylists.StylistId}, new { @class = "btn btn-outline-warning" })
+                </td>
+                <td>
+                @Html.ActionLink("Delete", "Delete", new { id = @stylists.StylistId}, new { @class = "btn btn-outline-danger" })
+                </td>
 
-<p>@Html.ActionLink("Add new stylist", "Create")</p>
-<p>@Html.ActionLink("Home", "Index", "Home")</p>
+            </tr>
+        }
+    </tbody>
+</table>
