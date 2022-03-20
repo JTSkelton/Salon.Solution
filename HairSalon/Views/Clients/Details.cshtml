@@ -2,13 +2,19 @@
   Layout = "_Layout";
 }
 
-@model Salon.Models.Clients
-
+@model Salon.Models.Client
 <h2>Client Details</h2>
 <hr />
 <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)<h3>
 
-
+@if(@Model.JoinEntities.Count == 0)
+{
+  <p>This client does not belong to any stylists</p>
+}
+else
+{
+  <h4>Stylist the Client belongs to:</h4>
+  <ul>
   @foreach(var join in Model.JoinEntities)
   {
     <li>@join.Stylists.StylistName</li>
@@ -19,7 +25,7 @@
     }
   }
   </ul>
-
+}
 
 <br>
 <p>@Html.ActionLink("Back to Clients", "Index")</p>

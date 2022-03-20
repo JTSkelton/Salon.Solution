@@ -18,7 +18,7 @@ namespace Salon.Controllers
 
      public ActionResult Index()
     {
-      List<Stylists> model = _db.Stylists.ToList();
+      List<Stylist> model = _db.Stylists.ToList();
       return View(model);
     }
 
@@ -29,7 +29,7 @@ namespace Salon.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Stylists stylists)
+    public ActionResult Create(Stylist stylists)
     {
       _db.Stylists.Add(stylists);
       _db.SaveChanges();
@@ -53,7 +53,7 @@ namespace Salon.Controllers
     }
 
     [HttpPost]
-    public ActionResult Edit(Stylists stylists)
+    public ActionResult Edit(Stylist stylists)
     {
       _db.Entry(stylists).State = EntityState.Modified;
       _db.SaveChanges();

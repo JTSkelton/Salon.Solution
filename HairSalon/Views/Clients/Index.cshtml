@@ -3,12 +3,12 @@
 }
 
 @using Salon.Models;
-@model List<Salon.Models.Clients>;
+@model List<Salon.Models.Client>;
 
 <h1>Salon Clients</h1>
 
 <ul>
-  @foreach(Clients clients in Model)
+  @foreach(Client clients in Model)
   {
     <li>@Html.ActionLink($"{clients.Name}", "Details", new { id = clients.ClientId }) | </li>
   }

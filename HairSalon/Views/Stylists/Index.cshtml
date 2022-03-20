@@ -3,7 +3,6 @@
 }
 
 @using Salon.Models;
-@model List<Salon.Models.Stylists>;
 
 <h1>Stylists</h1>
 
@@ -12,7 +11,7 @@
   <h3>No Stylists have been added yet!</h3>
 } 
 
-@foreach (Stylists stylists in Model)
+@foreach (Stylist stylists in Model)
 {
   <li>@Html.ActionLink($"{stylists.StylistName}", "Details", new { id = stylists.StylistId })</li>
 }

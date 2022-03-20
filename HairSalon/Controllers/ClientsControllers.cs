@@ -28,7 +28,7 @@ namespace Salon.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Clients clients, int StylistId)
+    public ActionResult Create(Client clients, int StylistId)
     {
       _db.Clients.Add(clients);
       _db.SaveChanges();
@@ -56,7 +56,7 @@ namespace Salon.Controllers
     }
 
     [HttpPost]
-    public ActionResult Edit(Clients clients, int StylistId)
+    public ActionResult Edit(Client clients, int StylistId)
     {if (StylistId != 0)
       {
         _db.StylistClients.Add(new StylistClients() { StylistId = StylistId, ClientId = clients.ClientId });
@@ -98,7 +98,7 @@ public ActionResult DeleteCategory(int joinId)
 }
 
 [HttpPost]
-public ActionResult AddCategory(Clients clients, int StylistId)
+public ActionResult AddCategory(Client clients, int StylistId)
 {
     if (StylistId != 0)
     {

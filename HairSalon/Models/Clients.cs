@@ -3,9 +3,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Salon.Models
 {
-  public class Clients
+  public class Client
   {
-    public Clients()
+    public Client()
         {
             this.JoinEntities = new HashSet<StylistClients>();
         }

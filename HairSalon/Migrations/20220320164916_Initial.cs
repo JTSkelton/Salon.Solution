@@ -43,36 +43,34 @@ namespace Salon.Migrations
                     StylistClientId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ClientId = table.Column<int>(type: "int", nullable: false),
-                    StylistId = table.Column<int>(type: "int", nullable: false),
-                    ClientsClientId = table.Column<int>(type: "int", nullable: true),
-                    StylistsStylistId = table.Column<int>(type: "int", nullable: true)
+                    StylistId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_StylistClients", x => x.StylistClientId);
                     table.ForeignKey(
-                        name: "FK_StylistClients_Clients_ClientsClientId",
-                        column: x => x.ClientsClientId,
+                        name: "FK_StylistClients_Clients_ClientId",
+                        column: x => x.ClientId,
                         principalTable: "Clients",
                         principalColumn: "ClientId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_StylistClients_Stylists_StylistsStylistId",
-                        column: x => x.StylistsStylistId,
+                        name: "FK_StylistClients_Stylists_StylistId",
+                        column: x => x.StylistId,
                         principalTable: "Stylists",
                         principalColumn: "StylistId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_StylistClients_ClientsClientId",
+                name: "IX_StylistClients_ClientId",
                 table: "StylistClients",
-                column: "ClientsClientId");
+                column: "ClientId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_StylistClients_StylistsStylistId",
+                name: "IX_StylistClients_StylistId",
                 table: "StylistClients",
-                column: "StylistsStylistId");
+                column: "StylistId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
