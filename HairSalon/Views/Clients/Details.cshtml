@@ -8,7 +8,21 @@
 <hr />
 <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)<h3>
 
+
+  @foreach(var join in Model.JoinEntities)
+  {
+    <li>@join.Stylists.StylistName</li>
+    @using (Html.BeginForm("DeleteStylist", "Clients"))
+    {
+      @Html.Hidden("joinId", @join.StylistClientId)
+      <input type="submit" value="Delete"/>
+    }
+  }
+  </ul>
+
+
 <br>
 <p>@Html.ActionLink("Back to Clients", "Index")</p>
 <p>@Html.ActionLink("Edit Client", "Edit", new { id = Model.ClientId })</p>
 <p>@Html.ActionLink("Delete Client", "Delete", new { id = Model.ClientId })</p>
+<p>@Html.ActionLink("Add a Stylist", "AddStylist", new { id = Model.ClientId })</p>

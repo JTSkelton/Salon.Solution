@@ -6,11 +6,24 @@
 
 <h2>Stylists Details</h2>
 <hr />
-<h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)<h3>
+<h3>@Html.DisplayNameFor(model => model.StylistName): @Html.DisplayFor(model => model.StylistName)<h3>
 <h3>@Html.DisplayNameFor(model => model.HairStyles): @Html.DisplayFor(model => model.HairStyles)<h3>
 <h3>@Html.DisplayNameFor(model => model.Age): @Html.DisplayFor(model => model.Age)<h3>
 
-<h3>@Html.LabelFor(model => model.Clients): @Html.DisplayFor(model => model.Clients)</h3> 
+@if(@Model.JoinEntities.Count == 0)
+{
+  <p>This stylist does not contain any clients</p>
+}
+else
+{
+  <h4>Clients the stylist contains:</h4>
+  <ul>
+  @foreach(var join in Model.JoinEntities)
+  {
+    <li>@join.Clients.Name</li>
+  }
+  </ul>
+}
 
 
   <p>@Html.ActionLink("Edit Stykist", "Edit", new { id = Model.StylistId })</p>

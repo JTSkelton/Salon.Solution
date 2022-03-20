@@ -6,14 +6,14 @@
 
 <h2>Edit</h2>
 
-<h4>Edit this stylist: @Html.DisplayFor(model => model.Name)</h4>
+<h4>Edit this stylist: @Html.DisplayFor(model => model.StylistName)</h4>
 
 @using (Html.BeginForm())
 {
   @Html.HiddenFor(model => model.StylistId)
 
-  @Html.LabelFor(model => model.Name)
-  @Html.TextBoxFor(model => model.Name)
+  @Html.LabelFor(model => model.StylistName)
+  @Html.TextBoxFor(model => model.StylistName)
 
   @Html.LabelFor(model => model.HairStyles)
   @Html.TextBoxFor(model => model.HairStyles)
@@ -21,7 +21,7 @@
   @Html.LabelFor(model => model.Age)
   @Html.TextBoxFor(model => model.Age)
 
-  @Html.LabelFor(model => model.Clients)
+  @Html.Label("Select Client")
   @Html.DropDownList("ClientId")
 
   <input type="submit" value="Save" />

@@ -18,37 +18,49 @@ namespace Salon.Controllers
 
     public ActionResult Index()
     {
-      List<Clients> model = _db.Clients.Include(clients => clients.Stylists).ToList();
-      return View(model);
+      return View(_db.Clients.ToList());
     }
 
     public ActionResult Create()
     {
+      ViewBag.StylistId = new SelectList(_db.Stylists, "StylistId", "StylistName");
       return View();
     }
 
     [HttpPost]
-    public ActionResult Create(Clients clients)
+    public ActionResult Create(Clients clients, int StylistId)
     {
       _db.Clients.Add(clients);
       _db.SaveChanges();
+       if (StylistId != 0)
+    {
+        _db.StylistClients.Add(new StylistClients() { StylistId = StylistId, ClientId = clients.ClientId });
+        _db.SaveChanges();
+    }
       return RedirectToAction("Index");
     }
 
     public ActionResult Details(int id)
     {
-      Clients thisClient = _db.Clients.FirstOrDefault(client => client.ClientId == id);
-      return View(thisClient);
+      var thisItem = _db.Clients
+        .Include(item => item.JoinEntities)
+        .ThenInclude(join => join.Stylists)
+        .FirstOrDefault(client => client.ClientId == id);
+    return View(thisItem);
     }
     public ActionResult Edit(int id)
     {
       var thisClient = _db.Clients.FirstOrDefault(client => client.ClientId == id);
+      ViewBag.StylistId = new SelectList(_db.Stylists, "StylistId", "StylistName");
       return View(thisClient);
     }
 
     [HttpPost]
-    public ActionResult Edit(Clients clients)
-    {
+    public ActionResult Edit(Clients clients, int StylistId)
+    {if (StylistId != 0)
+      {
+        _db.StylistClients.Add(new StylistClients() { StylistId = StylistId, ClientId = clients.ClientId });
+      }
       _db.Entry(clients).State = EntityState.Modified;
       _db.SaveChanges();
       return RedirectToAction("Index");
@@ -68,5 +80,32 @@ namespace Salon.Controllers
       _db.SaveChanges();
       return RedirectToAction("Index");
     }
+
+[HttpPost]
+public ActionResult DeleteCategory(int joinId)
+{
+    var joinEntry = _db.StylistClients.FirstOrDefault(entry => entry.StylistClientId == joinId);
+    _db.StylistClients.Remove(joinEntry);
+    _db.SaveChanges();
+    return RedirectToAction("Index");
+}
+
+    public ActionResult AddCategory(int id)
+{
+    var thisClient = _db.Clients.FirstOrDefault(client => client.ClientId == id);
+    ViewBag.StylistId = new SelectList(_db.Stylists, "StylistId", "StylistName");
+    return View(thisClient);
+}
+
+[HttpPost]
+public ActionResult AddCategory(Clients clients, int StylistId)
+{
+    if (StylistId != 0)
+    {
+      _db.StylistClients.Add(new StylistClients() { StylistId = StylistId, ClientId = clients.ClientId });
+      _db.SaveChanges();
+    }
+    return RedirectToAction("Index");
+}
   }
 }

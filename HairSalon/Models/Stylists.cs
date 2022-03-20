@@ -7,13 +7,13 @@ namespace Salon.Models
   {
     public Stylists()
     {
-      this.Clients = new HashSet<Clients>();
+      this.JoinEntities = new HashSet<StylistClients>();
     }
     [Key]
     public int StylistId { get; set; }
-    public string Name { get; set; }
+    public string StylistName { get; set; }
     public string HairStyles { get; set; }
     public int Age { get; set; }
-    public virtual ICollection<Clients> Clients { get; set; }
+    public virtual ICollection<StylistClients> JoinEntities { get; set; }
   }
 }

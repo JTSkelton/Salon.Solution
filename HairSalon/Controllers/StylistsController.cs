@@ -38,8 +38,11 @@ namespace Salon.Controllers
 
     public ActionResult Details(int id)
     {
-      Stylists thisStylist = _db.Stylists.FirstOrDefault(stylists => stylists.StylistId == id);
-      return View(thisStylist);
+      var thisStylist = _db.Stylists
+        .Include(stylist => stylist.JoinEntities)
+        .ThenInclude(join => join.Clients)
+        .FirstOrDefault(stylist => stylist.StylistId == id);
+    return View(thisStylist);
     }
 
     public ActionResult Edit(int id)
