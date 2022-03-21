@@ -3,4 +3,4 @@
 }
 
 <h1>Your list has been cleared!</h1>
-<p><a href="/stylists">Back to list.</a></p>
+@Html.ActionLink("Back to List", "Index", new { id = Model.StylistId }, new { @class = "btn btn-outline-info" })

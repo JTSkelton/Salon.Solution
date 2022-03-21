@@ -20,7 +20,7 @@ namespace Salon.Controllers
     {
       var thisItem = _db.Clients
         .Include(item => item.JoinEntities)
-        .ThenInclude(join => join.Stylists).ToList();
+        .ThenInclude(join => join.Stylists);
     return View(thisItem);
     }
 

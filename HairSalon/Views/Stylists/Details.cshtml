@@ -26,16 +26,16 @@
     <tbody>
             <tr class="table table-hover table-secondary">
                 <td width 10%>
-                    @Html.DisplayFor(model => model.StylistId)
+                    <h4>@Html.DisplayFor(model => model.StylistId)</h4>
                 </td>
                 <td width 50%>
-                    @Html.DisplayFor(model => model.StylistName)
+                    <h4>@Html.DisplayFor(model => model.StylistName)</h4>
                 </td>
                 <td width 50%>
-                    @Html.DisplayFor(model => model.HairStyles)
+                    <h4>@Html.DisplayFor(model => model.HairStyles)</h4>
                 </td>
                 <td width 50%>
-                    @Html.DisplayFor(model => model.Age)
+                    <h4>@Html.DisplayFor(model => model.Age)</h4>
                 </td>
                 <td width 50%>
                     @Html.ActionLink("Edit Stylist", "Edit", new { id = Model.StylistId }, new { @class = "btn btn-outline-info" })
@@ -52,7 +52,7 @@
 }
 else
 {
-  <h2>@Html.DisplayFor(model => model.StylistName)'s Client List:</h2>
+  <h1>@Html.DisplayFor(model => model.StylistName)'s Client List:</h1>
 
     <table class ="table table-borderd table-striped" style="width: 100%">
     <thead>

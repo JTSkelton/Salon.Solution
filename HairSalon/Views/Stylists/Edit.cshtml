@@ -21,6 +21,6 @@
   @Html.LabelFor(model => model.Age)
   @Html.TextBoxFor(model => model.Age)
 
-  <input type="submit" value="Save" />
-}
-<p>@Html.ActionLink("Back to list", "Index")</p>
+  <input type="submit" value="Save" class = "btn btn-outline-success" />
+}<br>
+@Html.ActionLink("Back to List", "Index", new { id = Model.StylistId }, new { @class = "btn btn-outline-info" })
