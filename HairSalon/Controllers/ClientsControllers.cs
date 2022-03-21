@@ -59,10 +59,14 @@ namespace Salon.Controllers
     }
 
     [HttpPost]
-    public ActionResult Edit(Client clients, int StylistId)
-    {if (StylistId != 0)
+    public ActionResult Edit(Client clients, int stylistId)
+     {
+      bool duplicate = _db.StylistClients.Any(join => 
+        join.StylistId == stylistId && join.ClientId == clients.ClientId);
+
+      if (stylistId != 0 && !duplicate)
       {
-        _db.StylistClients.Add(new StylistClients() { StylistId = StylistId, ClientId = clients.ClientId });
+        _db.StylistClients.Add(new StylistClients() { StylistId = stylistId, ClientId = clients.ClientId });
       }
       _db.Entry(clients).State = EntityState.Modified;
       _db.SaveChanges();
