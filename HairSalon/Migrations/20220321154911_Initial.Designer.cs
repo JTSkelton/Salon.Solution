@@ -8,7 +8,7 @@ using Salon.Models;
 namespace Salon.Migrations
 {
     [DbContext(typeof(SalonContext))]
-    [Migration("20220320194614_Initial")]
+    [Migration("20220321154911_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -64,14 +64,8 @@ namespace Salon.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
                     b.Property<int>("StylistId")
                         .HasColumnType("int");
-
-                    b.Property<string>("StylistName")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("StylistClientId");
 

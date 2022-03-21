@@ -43,9 +43,7 @@ namespace Salon.Migrations
                     StylistClientId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ClientId = table.Column<int>(type: "int", nullable: false),
-                    StylistId = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true),
-                    StylistName = table.Column<string>(type: "longtext CHARACTER SET utf8mb4", nullable: true)
+                    StylistId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

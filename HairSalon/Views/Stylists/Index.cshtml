@@ -53,8 +53,9 @@
                 <td>
                 @Html.ActionLink("Delete", "Delete", new { id = @stylists.StylistId}, new { @class = "btn btn-outline-danger" })
                 </td>
-
             </tr>
         }
     </tbody>
 </table>
+
+@Html.ActionLink("Add Stylist", "Create", new { id = 0}, new { @class = "btn btn-outline-success" })

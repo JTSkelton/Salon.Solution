@@ -15,17 +15,23 @@
             <th>
                 Client Name
             </th>
+            <th>
+                Stylist Name
+            </th>
         </tr>
     </thead>
     <tbody>
-        @foreach(Client clients in Model)
+        @foreach(StylistClients clients in Model)
         {
             <tr class="table table-hover table-secondary">
                 <td width 10%>
-                    @clients.ClientId
+                    @clients.Clients.ClientId
                 </td>
                 <td width 50%>
-                    @clients.Name
+                    @clients.Clients.Name
+                </td>
+                <td>
+                  @clients.Stylists.StylistName
                 </td>
                 <td>
                 @Html.ActionLink("Details", "Details", new { id = @clients.ClientId}, new { @class = "btn btn-outline-warning" })
@@ -36,7 +42,6 @@
                 <td>
                 @Html.ActionLink("Delete", "Delete", new { id = @clients.ClientId}, new { @class = "btn btn-outline-danger" })
                 </td>
-
             </tr>
         }
     </tbody>
