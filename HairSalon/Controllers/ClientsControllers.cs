@@ -18,7 +18,10 @@ namespace Salon.Controllers
 
     public ActionResult Index()
     {
-      return View(_db.Clients.ToList());
+      var thisItem = _db.Clients
+        .Include(item => item.JoinEntities)
+        .ThenInclude(join => join.Stylists).ToList();
+    return View(thisItem);
     }
 
     public ActionResult Create()
@@ -28,13 +31,13 @@ namespace Salon.Controllers
     }
 
     [HttpPost]
-    public ActionResult Create(Client clients, int StylistId)
+    public ActionResult Create(Client clients, Stylist stylist, int StylistId)
     {
       _db.Clients.Add(clients);
       _db.SaveChanges();
-       if (StylistId != 0)
+      if (StylistId != 0)
     {
-        _db.StylistClients.Add(new StylistClients() { StylistId = StylistId, ClientId = clients.ClientId });
+        _db.StylistClients.Add(new StylistClients() { StylistId = StylistId, ClientId = clients.ClientId, Name = clients.Name, StylistName = stylist.StylistName });
         _db.SaveChanges();
     }
       return RedirectToAction("Index");
@@ -56,10 +59,10 @@ namespace Salon.Controllers
     }
 
     [HttpPost]
-    public ActionResult Edit(Client clients, int StylistId)
+    public ActionResult Edit(Client clients, int StylistId, Stylist stylist)
     {if (StylistId != 0)
       {
-        _db.StylistClients.Add(new StylistClients() { StylistId = StylistId, ClientId = clients.ClientId });
+        _db.StylistClients.Add(new StylistClients() { StylistId = StylistId, ClientId = clients.ClientId, StylistName = stylist.StylistName });
       }
       _db.Entry(clients).State = EntityState.Modified;
       _db.SaveChanges();

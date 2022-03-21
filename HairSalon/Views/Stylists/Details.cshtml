@@ -4,28 +4,89 @@
 
 @model Salon.Models.Stylist
 
-<h2>Stylists Details</h2>
-<hr />
-<h3>@Html.DisplayNameFor(model => model.StylistName): @Html.DisplayFor(model => model.StylistName)<h3>
-<h3>@Html.DisplayNameFor(model => model.HairStyles): @Html.DisplayFor(model => model.HairStyles)<h3>
-<h3>@Html.DisplayNameFor(model => model.Age): @Html.DisplayFor(model => model.Age)<h3>
+<h1>@Html.DisplayFor(model => model.StylistName)'s Details</h1>
 
+<table class ="table table-borderd table-striped" style="width: 100%">
+    <thead>
+        <tr>
+            <th>
+                <h3>Id</h3>
+            </th>
+            <th>
+                <h3>Stylist Name</h3>
+            </th>
+            <th>
+                <h3>Hair Styles</h3>
+            </th>
+            <th>
+                <h3>Age</h3>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+            <tr class="table table-hover table-secondary">
+                <td width 10%>
+                    @Html.DisplayFor(model => model.StylistId)
+                </td>
+                <td width 50%>
+                    @Html.DisplayFor(model => model.StylistName)
+                </td>
+                <td width 50%>
+                    @Html.DisplayFor(model => model.HairStyles)
+                </td>
+                <td width 50%>
+                    @Html.DisplayFor(model => model.Age)
+                </td>
+                <td width 50%>
+                    @Html.ActionLink("Edit Stylist", "Edit", new { id = Model.StylistId }, new { @class = "btn btn-outline-info" })
+                </td>
+                <td width 50%>
+                    @Html.ActionLink("Delete Stylist", "Delete", new { id = Model.StylistId }, new { @class = "btn btn-outline-danger" })
+                </td>
+            </tr>
+    </tbody>
+</table>
 @if(@Model.JoinEntities.Count == 0)
 {
   <p>This stylist does not contain any clients</p>
 }
 else
 {
-  <h4>Clients the stylist contains:</h4>
-  <ul>
-  @foreach(var join in Model.JoinEntities)
-  {
-    <li>@join.Clients.Name</li>
+  <h2>@Html.DisplayFor(model => model.StylistName)'s Client List:</h2>
+
+    <table class ="table table-borderd table-striped" style="width: 100%">
+    <thead>
+        <tr>
+            <th>
+                <h3>Id</h3>
+            </th>
+            <th>
+              <h3>Client Name</h3>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var join in Model.JoinEntities)
+        {
+            <tr class="table table-hover table-secondary">
+                <td width 10%>
+                  <h4>@join.Clients.ClientId</h4>
+                </td>
+                <td width 50%>
+                  <h4>@join.Clients.Name</h4>
+                </td>
+                <td>
+                @Html.ActionLink("Details", "Details", "Clients", new { id = @join.Clients.ClientId}, new { @class = "btn btn-outline-info" })
+                </td>
+                <td>
+                  @Html.ActionLink("Edit", "Edit", "Clients", new { id = @join.Clients.ClientId}, new { @class = "btn btn-outline-info" })
+                </td>
+                <td>
+                @Html.ActionLink("Delete", "Delete", "Clients", new { id = @join.Clients.ClientId}, new { @class = "btn btn-outline-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
   }
   </ul>
-}
-
-
-  <p>@Html.ActionLink("Edit Stylist", "Edit", new { id = Model.StylistId })</p>
-  <p>@Html.ActionLink("Delete Stylist", "Delete", new { id = Model.StylistId })</p>
-  <p>@Html.ActionLink("Back to list", "Index")</p>

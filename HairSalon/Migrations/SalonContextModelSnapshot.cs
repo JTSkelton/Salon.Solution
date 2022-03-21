@@ -62,8 +62,14 @@ namespace Salon.Migrations
                     b.Property<int>("ClientId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Name")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<int>("StylistId")
                         .HasColumnType("int");
+
+                    b.Property<string>("StylistName")
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
 
                     b.HasKey("StylistClientId");
 

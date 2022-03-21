@@ -7,12 +7,42 @@
 
 <h1>Salon Clients</h1>
 
-<ul>
-  @foreach(Client clients in Model)
-  {
-    <li>@Html.ActionLink($"{clients.Name}", "Details", new { id = clients.ClientId }) | </li>
-  }
-</ul>
+<table class ="table table-borderd table-striped" style="width: 100%">
+    <thead>
+        <tr>
+            <th>
+                Id
+            </th>
+            <th>
+                Client Name
+            </th>
+            <th>
+                Stylist
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(Client join in Model)
+        {
+            <tr class="table table-hover table-secondary">
+                <td width 10%>
+                    @join.ClientId
+                </td>
+                <td width 50%>
+                    @join.Name
+                </td>
+                <td>
+                @Html.ActionLink("Details", "Details", new { id = @join.ClientId}, new { @class = "btn btn-outline-dark" })
+                </td>
+                <td>
+                  @Html.ActionLink("Edit", "Edit", new { id = @join.ClientId}, new { @class = "btn btn-outline-dark" })
+                </td>
+                <td>
+                @Html.ActionLink("Delete", "Delete", new { id = @join.ClientId}, new { @class = "btn btn-outline-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
 
-<p>@Html.ActionLink("Add New Client", "Create")</p>
-<p>@Html.ActionLink("Home", "Index", "Home")</p>
+<p>@Html.ActionLink("Add New Client", "Create","Clients", new { @class = "btn btn-outline-success" })</p>
