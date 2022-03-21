@@ -18,6 +18,6 @@
   @Html.Label("Select Stylist")
   @Html.DropDownList("StylistId")
 
-  <input type="submit" value="Save" />
-}
-<p>@Html.ActionLink("Back to Cuisines", "Index")</p>
+  <input type="submit" value="Save" class = "btn btn-outline-success" />
+}<br>
+<p>@Html.ActionLink("Back to Clients", "Index", new {id = 0}, new {@class = "btn btn-outline-success" })</p>
